@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+    <div class="checkout-container">
+        <h2>Checkout</h2>
+        <form id="checkout-form">
+            <!-- Name -->
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <!-- Address -->
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea>
+
+            <!-- Mobile Number -->
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number" required>
+
+            <!-- Payment Method -->
+            <label for="payment">Payment Method:</label>
+            <select id="payment" name="payment" required>
+                <option value="Cash on Delivery">Cash on Delivery</option>
+
+                <option value="UPI">UPI</option>
+                <option value="Credit Card">Credit Card</option>
+            </select>
+
+            <!-- UPI ID (Conditional) -->
+            <div id="upi-id-container" style="display: none;">
+                <label for="upi-id">UPI ID:</label>
+                <input type="text" id="upi-id" name="upi-id" placeholder="example@upi">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+
+    <script>
+        let cart = [];
+
+        // Receive cart data from the main page
+        window.addEventListener('message', (event) => {
+            if (event.data.cart) {
+                cart = event.data.cart;
+            }
+        });
+
+        // Show/hide UPI ID field based on payment method
+        const paymentMethod = document.getElementById('payment');
+        const upiIdContainer = document.getElementById('upi-id-container');
+        paymentMethod.addEventListener('change', () => {
+            if (paymentMethod.value === 'UPI') {
+                upiIdContainer.style.display = 'block';
+                document.getElementById('upi-id').setAttribute('required', true);
+            } else {
+                upiIdContainer.style.display = 'none';
+                document.getElementById('upi-id').removeAttribute('required');
+            }
+        });
+
+        // Handle Form Submission
+        document.getElementById('checkout-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const mobile = document.getElementById('mobile').value;
+            const paymentMethod = document.getElementById('payment').value;
+            const upiId = paymentMethod === 'UPI' ? document.getElementById('upi-id').value : null;
+
+            // Redirect to the receipt page with data
+            const receiptData = {
+                name,
+                address,
+                mobile,
+                upiId,
+                paymentMethod,
+                cart,
+                total: cart.reduce((total, item) => total + item.price * item.quantity, 0),
+            };
+            localStorage.setItem('receiptData', JSON.stringify(receiptData));
+            window.location.href = 'receipt.html';
+        });
+    </script>
+</body>
+</html>

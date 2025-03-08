@@ -1,0 +1,101 @@
+/* Receipt Container */
+.receipt-container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+    animation: fadeIn 0.5s ease-in-out;
+    border: 1px solid #e0e0e0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Logo */
+.receipt-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.receipt-logo img {
+    max-width: 200px; /* Adjust the size of the logo */
+    height: auto;
+}
+
+/* Receipt Header */
+.receipt-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.receipt-header h2 {
+    font-size: 1.5rem;
+    color: #484343;
+    margin: 10px 0;
+}
+
+.receipt-header p {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Receipt Content */
+.receipt-content {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.receipt-content strong {
+    color: #000;
+}
+
+.receipt-content .item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.receipt-content .total {
+    font-weight: bold;
+    border-top: 2px solid #333;
+    padding-top: 10px;
+    margin-top: 15px;
+}
+
+/* Download Button */
+.download-btn {
+    display: block;
+    width: 100%;
+    background: #3cb815;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.download-btn:hover {
+    background: #2f9a12;
+    transform: translateY(-2px);
+}
+
+.download-btn:active {
+    transform: translateY(0);
+}

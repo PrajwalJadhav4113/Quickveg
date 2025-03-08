@@ -1,0 +1,152 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('background.png'); /* Add your background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.checkout-container {
+    background: rgba(242, 252, 229, 0.9); /* Semi-transparent white background */
+    padding: 20px; /* Reduced padding */
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    animation: fadeIn 0.5s ease-in-out;
+    -webkit-backdrop-filter: blur(5px); /* Adds a blur effect to the background for Safari */
+    backdrop-filter: blur(5px); /* Adds a blur effect to the background */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.checkout-container h2 {
+    font-size: 1.8rem; /* Slightly smaller font size */
+    color: #333;
+    margin-bottom: 15px; /* Reduced margin */
+    text-align: center;
+}
+
+/* Form Styles */
+#checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced gap between form elements */
+}
+
+#checkout-form label {
+    font-size: 0.9rem; /* Smaller font size */
+    color: #555;
+    font-weight: 500;
+}
+
+#checkout-form input,
+#checkout-form textarea,
+#checkout-form select {
+    width: 100%;
+    padding: 10px; /* Reduced padding */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem; /* Smaller font size */
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#checkout-form input:focus,
+#checkout-form textarea:focus,
+#checkout-form select:focus {
+    border-color: #3cb815;
+    box-shadow: 0 0 8px rgba(60, 184, 21, 0.3);
+    outline: none;
+}
+
+#checkout-form textarea {
+    resize: vertical;
+    min-height: 80px; /* Reduced height */
+}
+
+#checkout-form select {
+    appearance: none;
+    background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 10px center;
+    background-size: 14px; /* Smaller arrow icon */
+    padding-right: 35px; /* Adjusted padding */
+}
+
+#upi-id-container {
+    display: none;
+    animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button Styles */
+#checkout-form button {
+    background: #3cb815;
+    color: #fff;
+    border: none;
+    padding: 10px; /* Reduced padding */
+    border-radius: 8px;
+    font-size: 0.9rem; /* Smaller font size */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#checkout-form button:hover {
+    background: #2f9a12;
+    transform: translateY(-2px);
+}
+
+#checkout-form button:active {
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .checkout-container {
+        padding: 15px; /* Further reduced padding for mobile */
+    }
+
+    .checkout-container h2 {
+        font-size: 1.5rem;
+    }
+
+    #checkout-form input,
+    #checkout-form textarea,
+    #checkout-form select {
+        padding: 8px; /* Further reduced padding for mobile */
+        font-size: 0.8rem; /* Smaller font size for mobile */
+    }
+
+    #checkout-form button {
+        padding: 8px; /* Further reduced padding for mobile */
+        font-size: 0.8rem; /* Smaller font size for mobile */
+    }
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt</title>
+    <link rel="stylesheet" href="receipt.css">
+</head>
+<body>
+    <div class="receipt-container">
+        <!-- Logo -->
+        <div class="receipt-logo">
+            <img src="newweblogo.png" alt="Company Logo"> <!-- Replace with your logo -->
+        </div>
+
+        <!-- Receipt Header -->
+        <div class="receipt-header">
+            <h2>Payment Receipt</h2>
+            <p>Thank you for shopping with us!</p>
+        </div>
+
+        <!-- Receipt Content -->
+        <div class="receipt-content" id="receipt">
+            <!-- Receipt data will be dynamically inserted here -->
+        </div>
+
+        <!-- Download Button -->
+        <button class="download-btn" onclick="downloadReceipt()">Download Receipt</button>
+    </div>
+
+    <script>
+        // Retrieve receipt data from localStorage
+        const receiptData = JSON.parse(localStorage.getItem('receiptData'));
+
+        // Generate Receipt
+        function generateReceipt() {
+            let receipt = `
+                <div class="item"><strong>Name:</strong> ${receiptData.name}</div>
+                <div class="item"><strong>Address:</strong> ${receiptData.address}</div>
+                <div class="item"><strong>Mobile:</strong> ${receiptData.mobile}</div>
+            `;
+            if (receiptData.upiId) {
+                receipt += `<div class="item"><strong>UPI ID:</strong> ${receiptData.upiId}</div>`;
+            }
+            receipt += `<hr>`;
+            receiptData.cart.forEach(item => {
+                receipt += `
+                    <div class="item">
+                        <span>${item.name} (${item.quantity})</span>
+                        <span>₹${item.price * item.quantity}</span>
+                    </div>
+                `;
+            });
+            receipt += `
+                <div class="total">
+                    <span>Total:</span>
+                    <span>₹${receiptData.total}</span>
+                </div>
+                <hr>
+                <div class="item"><strong>Payment Method:</strong> ${receiptData.paymentMethod}</div>
+            `;
+            return receipt;
+        }
+
+        // Display Receipt
+        document.getElementById('receipt').innerHTML = generateReceipt();
+
+        // Download Receipt
+        function downloadReceipt() {
+            const receipt = document.getElementById('receipt').textContent;
+            const blob = new Blob([receipt], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'receipt.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
